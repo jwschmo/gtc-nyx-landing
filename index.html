@@ -460,6 +460,24 @@
 </footer>
 
 <script>
+  // ── Phone mask: formats raw digits as +1 (XXX) XXX-XXXX ──
+  (function() {
+    var ph = document.getElementById('phone');
+    ph.addEventListener('input', function() {
+      var digits = this.value.replace(/\D/g, '');
+      // Strip leading 1 if they typed it
+      if (digits.length > 10 && digits[0] === '1') digits = digits.slice(1);
+      if (digits.length > 10) digits = digits.slice(0, 10);
+      var formatted = '';
+      if (digits.length > 0) formatted = '+1 (' + digits.slice(0, 3);
+      if (digits.length >= 3) formatted += ') ';
+      if (digits.length > 3) formatted += digits.slice(3, 6);
+      if (digits.length >= 6) formatted += '-';
+      if (digits.length > 6) formatted += digits.slice(6, 10);
+      this.value = formatted;
+    });
+  })();
+
   /*
    * ── BACKEND OPTIONS ──
    *
