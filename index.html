@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nyx Industries — GTC 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0b0f;
+    --surface: #111219;
+    --surface-hover: #161722;
+    --border: #1e1f2e;
+    --border-light: #2a2b3d;
+    --text: #e4e4ec;
+    --text-secondary: #9394a5;
+    --text-muted: #5c5d6e;
+    --accent: #00c896;
+    --accent-hover: #00a87e;
+    --accent-glow: rgba(0, 200, 150, 0.12);
+    --accent-glow-strong: rgba(0, 200, 150, 0.25);
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--bg);
+  }
+
+  .logo-text {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .header-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(0, 200, 150, 0.3);
+    padding: 0.3rem 0.65rem;
+    border-radius: 4px;
+    background: var(--accent-glow);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-overline {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .hero h1 span {
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ── STATS ROW ── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .stat {
+    background: var(--bg);
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+  }
+
+  /* ── FORM SECTION ── */
+  .form-section {
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .form-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .form-header h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .form-header p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .form-body {
+    padding: 1.75rem 2rem 2rem;
+  }
+
+  .field {
+    margin-bottom: 1.15rem;
+  }
+
+  .field label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 0.45rem;
+  }
+
+  .field input {
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .field input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.4rem;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.08s;
+  }
+
+  .submit-btn:hover { background: var(--accent-hover); }
+  .submit-btn:active { transform: scale(0.98); }
+
+  /* ── SUCCESS STATE ── */
+  .success {
+    display: none;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .success.show { display: block; animation: fadeIn 0.4s ease; }
+
+  .success-check {
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .success-check svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .success h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .success p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .success .redirect-note {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 1.25rem;
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  footer p {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+
+  footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 520px) {
+    header { padding: 1rem 1.25rem; }
+    .hero { padding: 3.5rem 1.25rem 3rem; }
+    .stat-value { font-size: 1.15rem; }
+    .form-section { padding: 2.5rem 1.25rem; }
+    .form-header, .form-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://nyx.industries" class="logo">
+    <div class="logo-mark">N</div>
+    <div class="logo-text">Nyx Industries</div>
+  </a>
+  <div class="header-badge">GTC 2026</div>
+</header>
+
+<section class="hero">
+  <div class="hero-overline">FPGA-Native AI Inference</div>
+  <h1>The Neural Network<br><span>IS the Circuit</span></h1>
+  <p class="hero-sub">
+    We crystallize neural network weights directly into FPGA fabric.
+    No GPU. No memory bottleneck. No compromises.
+  </p>
+</section>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-value">1,200+</div>
+    <div class="stat-label">Tokens / sec</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">&lt;10W</div>
+    <div class="stat-label">Power</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">&lt;2ms</div>
+    <div class="stat-label">p99 Latency</div>
+  </div>
+</div>
+
+<section class="form-section">
+  <div class="form-card">
+    <div class="form-header">
+      <h2>Connect with Us</h2>
+      <p>Learn how FPGA-native inference changes the math on edge AI.</p>
+    </div>
+
+    <div class="form-body" id="formContainer">
+      <form id="contactForm" action="https://formsubmit.co/info@nyx-robotics.com" method="POST">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" placeholder="Acme Corp" required autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="jane@acme.com" required autocomplete="email">
+        </div>
+        <!-- Tag as GTC lead -->
+        <input type="hidden" name="_source" value="gtc-2026">
+        <!-- Redirect after submit -->
+        <input type="hidden" name="_next" value="https://nyx.industries">
+        <!-- Email subject line -->
+        <input type="hidden" name="_subject" value="GTC 2026 Lead — New Contact">
+        <!-- Disable captcha for booth UX -->
+        <input type="hidden" name="_captcha" value="false">
+        <!-- Use clean email template -->
+        <input type="hidden" name="_template" value="table">
+        <button type="submit" class="submit-btn">Connect</button>
+      </form>
+    </div>
+
+    <div class="success" id="successMsg">
+      <div class="success-check">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h3>You're connected</h3>
+      <p>Thanks for stopping by our booth. We'll follow up soon.</p>
+      <div class="redirect-note">Redirecting to nyx.industries&hellip;</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>
+    <a href="https://nyx.industries">nyx.industries</a> &nbsp;&middot;&nbsp;
+    <a href="mailto:info@nyx-robotics.com">info@nyx-robotics.com</a> &nbsp;&middot;&nbsp;
+    Austin, TX
+  </p>
+</footer>
+
+<script>
+  /*
+   * ── BACKEND OPTIONS ──
+   *
+   * OPTION A — Formspree (current setup, easiest):
+   *   1. Go to formspree.io, create a free form
+   *   2. Replace YOUR_FORM_ID in the <form action="..."> above
+   *   3. The _next hidden field handles the redirect to nyx.industries
+   *   4. Done — no JS changes needed, Formspree handles everything
+   *
+   * OPTION B — Google Sheets via Apps Script:
+   *   Uncomment the JS below, remove method="POST" and action from the <form>,
+   *   and replace APPS_SCRIPT_URL with your deployed script URL.
+   *
+   * OPTION C — Your own API endpoint:
+   *   Same pattern as Option B, just change the fetch URL.
+   */
+
+  // ── OPTION B/C: JS-based submission (uncomment to use) ──
+  //
+  // document.getElementById('contactForm').addEventListener('submit', function(e) {
+  //   e.preventDefault();
+  //   const data = {
+  //     name: document.getElementById('name').value.trim(),
+  //     company: document.getElementById('company').value.trim(),
+  //     email: document.getElementById('email').value.trim(),
+  //     source: 'gtc-2026'
+  //   };
+  //
+  //   // POST to your endpoint
+  //   fetch('APPS_SCRIPT_URL', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(data)
+  //   }).catch(() => {});  // Fire and forget
+  //
+  //   // Show success + redirect
+  //   document.getElementById('formContainer').style.display = 'none';
+  //   document.getElementById('successMsg').classList.add('show');
+  //   setTimeout(() => { window.location.href = 'https://nyx.industries'; }, 3000);
+  // });
+</script>
+
+</body>
+</html>
